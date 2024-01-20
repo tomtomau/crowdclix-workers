@@ -11,7 +11,7 @@ export default {
     if (pathname === "/api/artists") {
       // If you did not use `DB` as your binding name, change it here
       const { results } = await env.DB.prepare(
-        "SELECT * FROM Customers WHERE ArtistName = ?"
+        "SELECT * FROM Artists WHERE ArtistName = ?"
       )
         .bind("Sonic Mirage")
         .all();
