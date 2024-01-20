@@ -10,6 +10,11 @@
 
 export default {
 	async fetch(request, env, ctx) {
-		return new Response("Hello World!");
-	},
+		const url = request.url
+		const path = url.match(/^https?:\/\/[^\/]+\/(.*)$/)[1]
+		if(path === 'artist') {
+			return new Response("welcome to artist page")
+		}
+		return new Response("Error where you came?")
+	}
 };
