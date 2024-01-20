@@ -1,5 +1,4 @@
 import {getArtist} from "./get-artist";
-
 /**
  * Welcome to Cloudflare Workers! This is your first worker.
  *
@@ -13,12 +12,15 @@ const hardcodedArtistName    = "Sonic Mirage"
 
 export default {
     async fetch(request, env, ctx) {
+        const headers = [
+            ['Access-Control-Allow-Origin', '*']
+        ];
+
         const {pathname} = new URL(request.url);
-
-        if (pathname === '/artist') {
-            return getArtist(env, hardcodedArtistName);
-        }
-
-        return new Response("Error where you came?")
+        if (pathname.startsWith('/artists')) {
+			const id = pathname.split('/').pop()
+            return getArtist(env, headers, id);
+		}	
+		return new Response("Error Not Found")
     }
 };
