@@ -1,3 +1,10 @@
 name = "crowdclix_workers"
+account_id = "2dccbe1896bc719c10e6502be7070494"
+workers_dev = true
+# This is where we add in a custom domain
+#route = { pattern = "crowdclix_workers.tom-newby-au.workers.dev/*", zone_name = "workers.dev"}
 main = "src/index.js"
-compatibility_date = "2024-01-20"
+compatibility_date = "2022-06-03"
+
+[dev]
+host="localhost"
