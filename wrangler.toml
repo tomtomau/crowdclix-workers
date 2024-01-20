@@ -8,3 +8,8 @@ compatibility_date = "2022-06-03"
 
 [dev]
 host="localhost"
+
+[[d1_databases]]
+binding = "DB" # i.e. available in your Worker on env.DB
+database_name = "crowdclix-data"
+database_id = "21664d7c-b815-4360-8896-e108f44275de"
