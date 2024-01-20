@@ -7,22 +7,20 @@
  *
  * Learn more at https://developers.cloudflare.com/workers/
  */
-const artist = 
-{
-    "artist": 
-        {
-            "name": "Sonic Mirage", 
-            "description": "Sonic Mirage captivates audiences with ethereal melodies and hypnotic rhythms, blending genres seamlessly. Their music, a cosmic fusion of dreamy synth waves and dynamic beats, creates an immersive sonic journey.",
-            "logo": "logo_url"
-        }
-}
+const DB = "crowdclix-data";
+const ArtistName = "Sonic Mirage"  
 
 export default {
 	async fetch(request, env, ctx) {
 		const url = request.url
 		const path = url.match(/^https?:\/\/[^\/]+\/(.*)$/)[1]
 		if(path === 'artist') {
-			return Response.json(artist);
+			const { results } = await env.DB.prepare(
+				"SELECT * FROM Artists WHERE ArtistName = ?"
+			  )
+				.bind(ArtistName)
+				.all();
+			  return Response.json(results);
 		}
 		return new Response("Error where you came?")
 	}
