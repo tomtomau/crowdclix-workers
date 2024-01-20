@@ -12,11 +12,13 @@ const artist =
 {
     "artist": 
         {
-            "name": "artist_name", 
-            "description": "description_of_artist",
+            "name": "Sonic Mirage", 
+            "description": "Sonic Mirage captivates audiences with ethereal melodies and hypnotic rhythms, blending genres seamlessly. Their music, a cosmic fusion of dreamy synth waves and dynamic beats, creates an immersive sonic journey.",
             "logo": "logo_url"
         }
 }
+
+
 
 
 
