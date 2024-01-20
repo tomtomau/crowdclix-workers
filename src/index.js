@@ -1,5 +1,7 @@
 import {getArtist} from "./get-artist";
 import {postSignup} from "./signup";
+import {getPageviews} from "./get-pageviews";
+
 
 /**
  * Welcome to Cloudflare Workers! This is your first worker.
@@ -11,22 +13,33 @@ import {postSignup} from "./signup";
  * Learn more at https://developers.cloudflare.com/workers/
  */
 const hardcodedArtistName    = "Sonic Mirage"
+const DB = "crowdclix-data";
+
 
 export default {
     async fetch(request, env, ctx) {
+        const headers = [
+            ['Access-Control-Allow-Origin', '*']
+        ];
+
         const {pathname} = new URL(request.url);
         const method = request.method;
         const body = request.body;
 
-        if (pathname === '/artist') {
-            return getArtist(env, hardcodedArtistName);
-        }
-        if (pathname === '/signup' && method === "POST") {
-            console.log(request);
+        if (pathname.startsWith('/artists')) {
+			const id = pathname.split('/').pop()
+            return getArtist(env, DB, headers, id);
+		}
 
-            return postSignup(body);
-        }
+		if (pathname.startsWith('/pageviews')) {
+			const id = pathname.split('/').pop()
+            return getPageviews(env, DB, headers, id);
+		}
+    if (pathname === '/signup' && method === "POST") {
+      console.log(request);
 
-        return new Response("Error where you came?")
+      return postSignup(body);
+    }
+		return new Response("Error Not Found")
     }
 };
