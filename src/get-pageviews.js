@@ -8,6 +8,6 @@ export async function getPageviews(env, artistID) {
         .all();
 
     // Return zero count if no pageviews
-    if (results[0] == null) return Response.json({"ArtistPageviews":0});
+    if (results[0] == null) return Response.json({"ArtistPageviews":-1});
     return Response.json(results[0]);
 }
