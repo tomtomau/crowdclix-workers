@@ -1,6 +1,4 @@
-const DB = "crowdclix-data";
-
-export async function getPageviews(env, headers, artistID) {
+export async function getPageviews(env, DB, headers, artistID) {
     const pageviews = await env.DB.prepare(
         "SELECT ArtistPageviews FROM Artists WHERE ArtistID = ?"
     )

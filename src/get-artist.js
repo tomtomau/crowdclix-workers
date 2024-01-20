@@ -1,7 +1,4 @@
-const DB = "crowdclix-data";
-
-
-export async function getArtist(env, headers, artistID) {
+export async function getArtist(env, DB, headers, artistID) {
     const artist = await env.DB.prepare(
         "SELECT * FROM Artists WHERE ArtistID = ?"
     )
