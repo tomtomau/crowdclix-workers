@@ -31,10 +31,16 @@ export default {
             return getArtist(env, DB, headers, id);
 		}
 
-		if (pathname.startsWith('/pageviews')) {
+		if (pathname.startsWith('/pageviews' && method === "GET")) {
 			const id = pathname.split('/').pop()
             return getPageviews(env, DB, headers, id);
 		}
+
+		if (pathname.startsWith('/pageviews' && method === "POST")) {
+			const id = pathname.split('/').pop()
+            return postPageviews(env, DB, headers, id);
+		}
+
     if (pathname === '/signup' && method === "POST") {
       console.log(request);
 
