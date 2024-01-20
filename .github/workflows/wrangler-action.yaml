@@ -19,5 +19,5 @@ jobs:
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          preCommands: /usr/bin/npx wrangler d1 execute crowdclix-data --file=./schema.sql
+          preCommands: npm wrangler d1 execute crowdclix-data --file=./schema.sql
           command: deploy
