@@ -10,16 +10,6 @@
 const DB = "crowdclix-data";
 const ArtistName = "Sonic Mirage"  
 
-const artist = 
-{
-    "artist": 
-        {
-            "name": "Sonic Mirage", 
-            "description": "Sonic Mirage captivates audiences with ethereal melodies and hypnotic rhythms, blending genres seamlessly. Their music, a cosmic fusion of dreamy synth waves and dynamic beats, creates an immersive sonic journey.",
-            "logo": "logo_url"
-        }
-}
-
 export default {
 	async fetch(request, env, ctx) {
 		const url = request.url
