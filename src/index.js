@@ -7,6 +7,9 @@
  *
  * Learn more at https://developers.cloudflare.com/workers/
  */
+const DB = "crowdclix-data";
+const ArtistName = "Sonic Mirage"  
+
 const artist = 
 {
     "artist": 
@@ -22,7 +25,12 @@ export default {
 		const url = request.url
 		const path = url.match(/^https?:\/\/[^\/]+\/(.*)$/)[1]
 		if(path === 'artist') {
-			return Response.json(artist);
+			const { results } = await env.DB.prepare(
+				"SELECT * FROM Artists WHERE ArtistName = ?"
+			  )
+				.bind(ArtistName)
+				.all();
+			  return Response.json(results);
 		}
 		return new Response("Error where you came?")
 	}
