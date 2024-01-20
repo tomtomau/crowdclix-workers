@@ -4,13 +4,11 @@ Your Python code in [index.py](https://github.com/cloudflare/python-worker-hello
 
 In addition to [Wrangler](https://github.com/cloudflare/wrangler2) and [npm](https://www.npmjs.com/get-npm), you will need to install [Transcrypt](https://www.transcrypt.org/docs/html/installation_use.html), including Python 3.7 and virtualenv.
 
-#### Wrangler
+#### Setup
 
-- Clone repository (`git clone https://github.com/cloudflare/python-worker-hello-world`)
-- Run `npm install`
-- Update `wrangler.toml` with your project `name`, `account_id`, and `route` as required
-
-Further documentation for Wrangler can be found [here](https://developers.cloudflare.com/workers/wrangler/).
+* clone this repository
+* `npm install`
+* Follow the "transcrypt" instructions below
 
 #### Transcrypt
 
@@ -26,6 +24,36 @@ source env/bin/activate
 pip install transcrypt
 ```
 
+
+Tom struggled with these instructions because he is not a wizard with python...
+
+```
+pip3 virtualenv
+
+python3 -m virtualenv
+
+source env/bin/activate
+
+pip install transcypt
+```
+
+#### Running the application
+
+```bash
+npx wrangler dev
+
+# This should then build
+
+# Then you should be able to hit `[b]` to go to the browser
+
+# Then checkout `index.py` and play around
+
+# When you make changes to index.py you may need to restart `npx wrangler dev` by exiting and restarting...
+
+```
+
+
+#### Other docs that came from the initial repo
 After that you can run Wrangler commands, such as `wrangler publish` to push your code to Cloudflare.  If you exit virtualenv (`deactivate`) and return to the project directory later, you'll need to activate virtualenv (`source env/bin/activate`) but will not need to rerun the other installation commands.
 
 If `python3` is not Python 3.7 on your system, make sure you install it, create the virtualenv using the right version of Python, and edit webpack.config.js under `command` to specify the correct path to the Python 3.7 executable in the virtualenv directory. If you are using Windows, see [this workaround for an issue with transcrypt-loader paths](https://github.com/QQuick/Transcrypt/issues/624#issuecomment-507866238).
