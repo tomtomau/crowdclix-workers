@@ -1,5 +1,4 @@
 import {getArtist} from "./get-artist";
-
 /**
  * Welcome to Cloudflare Workers! This is your first worker.
  *
@@ -18,11 +17,10 @@ export default {
         ];
 
         const {pathname} = new URL(request.url);
-
-        if (pathname === '/artist') {
-            return getArtist(env, headers, hardcodedArtistName);
-        }
-
-        return new Response("Error where you came?")
+        if (pathname.startsWith('/artists')) {
+			const id = pathname.split('/').pop()
+            return getArtist(env, headers, id);
+		}	
+		return new Response("Error Not Found")
     }
 };
