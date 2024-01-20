@@ -1,3 +1,5 @@
+import {getArtist} from "./get-artist";
+
 /**
  * Welcome to Cloudflare Workers! This is your first worker.
  *
@@ -7,21 +9,16 @@
  *
  * Learn more at https://developers.cloudflare.com/workers/
  */
-const DB = "crowdclix-data";
-const ArtistName = "Sonic Mirage"  
+const hardcodedArtistName    = "Sonic Mirage"
 
 export default {
-	async fetch(request, env, ctx) {
-		const url = request.url
-		const path = url.match(/^https?:\/\/[^\/]+\/(.*)$/)[1]
-		if(path === 'artist') {
-			const { results } = await env.DB.prepare(
-				"SELECT * FROM Artists WHERE ArtistName = ?"
-			  )
-				.bind(ArtistName)
-				.all();
-			  return Response.json(results);
-		}
-		return new Response("Error where you came?")
-	}
+    async fetch(request, env, ctx) {
+        const {pathname} = new URL(request.url);
+
+        if (pathname === 'artist') {
+            return getArtist(hardcodedArtistName);
+        }
+
+        return new Response("Error where you came?")
+    }
 };
