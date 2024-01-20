@@ -15,13 +15,16 @@ const hardcodedArtistName    = "Sonic Mirage"
 export default {
     async fetch(request, env, ctx) {
         const {pathname} = new URL(request.url);
+        const method = request.method;
+        const body = request.body;
 
         if (pathname === '/artist') {
             return getArtist(env, hardcodedArtistName);
         }
-        //Make sure this does signup stuff
-        if (pathname === 'signup') {
-            return postSignup(/** verify the response*/);
+        if (pathname === '/signup' && method === "POST") {
+            console.log(request);
+
+            return postSignup(body);
         }
 
         return new Response("Error where you came?")
