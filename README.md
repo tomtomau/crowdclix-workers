@@ -2,7 +2,7 @@
 
 Your Python code in [index.py](https://github.com/cloudflare/python-worker-hello-world/blob/master/index.py), running on Cloudflare Workers.
 
-In addition to [Wrangler](https://github.com/cloudflare/wrangler2) and [npm](https://www.npmjs.com/get-npm), you will need to install [Transcrypt](https://www.transcrypt.org/docs/html/installation_use.html), including Python 3.7 and virtualenv.
+In addition to [Wrangler](https://github.com/cloudflare/wrangler2) and [npm](https://www.npmjs.com/get-npm), you will need to install [Transcrypt](https://www.transcrypt.org/docs/html/installation_use.html), including Python 3.7 and virtualenv
 
 #### Setup
 
@@ -28,13 +28,13 @@ pip install transcrypt
 Tom struggled with these instructions because he is not a wizard with python...
 
 ```
-pip3 virtualenv
+pip3 install virtualenv
 
-python3 -m virtualenv
+python3 -m virtualenv env
 
 source env/bin/activate
 
-pip install transcypt
+pip install transcrypt
 ```
 
 #### Running the application
