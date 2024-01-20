@@ -1,4 +1,5 @@
 import {getArtist} from "./get-artist";
+import {postSignup} from "./signup";
 
 /**
  * Welcome to Cloudflare Workers! This is your first worker.
@@ -17,6 +18,10 @@ export default {
 
         if (pathname === 'artist') {
             return getArtist(hardcodedArtistName);
+        }
+        //Make sure this does signup stuff
+        if (pathname === 'signup') {
+            return postSignup(/** verify the response*/);
         }
 
         return new Response("Error where you came?")
