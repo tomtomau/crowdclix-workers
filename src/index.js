@@ -15,8 +15,8 @@ export default {
     async fetch(request, env, ctx) {
         const {pathname} = new URL(request.url);
 
-        if (pathname === 'artist') {
-            return getArtist(hardcodedArtistName);
+        if (pathname === '/artist') {
+            return getArtist(env, hardcodedArtistName);
         }
 
         return new Response("Error where you came?")
