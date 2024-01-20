@@ -1,4 +1,6 @@
 import {getArtist} from "./get-artist";
+import {getPageviews} from "./get-pageviews";
+
 /**
  * Welcome to Cloudflare Workers! This is your first worker.
  *
@@ -9,6 +11,8 @@ import {getArtist} from "./get-artist";
  * Learn more at https://developers.cloudflare.com/workers/
  */
 const hardcodedArtistName    = "Sonic Mirage"
+const DB = "crowdclix-data";
+
 
 export default {
     async fetch(request, env, ctx) {
@@ -17,10 +21,17 @@ export default {
         ];
 
         const {pathname} = new URL(request.url);
+
         if (pathname.startsWith('/artists')) {
 			const id = pathname.split('/').pop()
-            return getArtist(env, headers, id);
-		}	
+            return getArtist(env, DB, headers, id);
+		}
+
+		if (pathname.startsWith('/pageviews')) {
+			const id = pathname.split('/').pop()
+            return getPageviews(env, DB, headers, id);
+		}
+
 		return new Response("Error Not Found")
     }
 };

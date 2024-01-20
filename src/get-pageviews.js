@@ -1,6 +1,4 @@
-const DB = "crowdclix-data";
-
-export async function getPageviews(env, artistID) {
+export async function getPageviews(env, DB, headers, artistID) {
     const pageviews = await env.DB.prepare(
         "SELECT ArtistPageviews FROM Artists WHERE ArtistID = ?"
     )
@@ -9,5 +7,7 @@ export async function getPageviews(env, artistID) {
 
     // Return zero count if no pageviews
     if (pageviews === null) throw new Error('Not found');
-    return Response.json(pageviews);
+    return Response.json(pageviews, {
+        headers: headers
+    });
 }
