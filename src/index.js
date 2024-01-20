@@ -8,8 +8,20 @@
  * Learn more at https://developers.cloudflare.com/workers/
  */
 
+const artist = 
+{
+    "artist": 
+        {
+            "name": "artist_name", 
+            "description": "description_of_artist",
+            "logo": "logo_url"
+        }
+}
+
+
+
 export default {
 	async fetch(request, env, ctx) {
-		return new Response("Hello World!");
+		return Response.json(artist);
 	},
 };
