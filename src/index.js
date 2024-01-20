@@ -7,7 +7,6 @@
  *
  * Learn more at https://developers.cloudflare.com/workers/
  */
-
 const artist = 
 {
     "artist": 
@@ -18,12 +17,13 @@ const artist =
         }
 }
 
-
-
-
-
 export default {
 	async fetch(request, env, ctx) {
-		return Response.json(artist);
-	},
+		const url = request.url
+		const path = url.match(/^https?:\/\/[^\/]+\/(.*)$/)[1]
+		if(path === 'artist') {
+			return Response.json(artist);
+		}
+		return new Response("Error where you came?")
+	}
 };
