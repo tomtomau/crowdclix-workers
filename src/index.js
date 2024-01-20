@@ -13,7 +13,7 @@ export default {
 		const url = request.url
 		const path = url.match(/^https?:\/\/[^\/]+\/(.*)$/)[1]
 		if(path === 'artist') {
-			return new Response("welcome to artist page")
+			return Response.json(artist);
 		}
 		return new Response("Error where you came?")
 	}
