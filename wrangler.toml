@@ -1,5 +1,5 @@
-name = ""
-account_id = ""
+name = "crowdclix_workers"
+account_id = "2dccbe1896bc719c10e6502be7070494"
 workers_dev = true
 route = { pattern = "", zone_id = ""}
 main = "dist/main.js"
@@ -7,3 +7,6 @@ compatibility_date = "2022-06-03"
 
 [build]
 command = "npm run build"
+
+[dev]
+host="localhost"
