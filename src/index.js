@@ -17,7 +17,7 @@ export default {
         ];
 
         const {pathname} = new URL(request.url);
-        if (pathname.startsWith('/artist')) {
+        if (pathname.startsWith('/artists')) {
 			const id = pathname.split('/').pop()
             return getArtist(env, headers, id);
 		}	
