@@ -3,8 +3,13 @@ account_id = "2dccbe1896bc719c10e6502be7070494"
 workers_dev = true
 # This is where we add in a custom domain
 #route = { pattern = "crowdclix_workers.tom-newby-au.workers.dev/*", zone_name = "workers.dev"}
-main = "src/index.js"
+main = "src/index.ts"
 compatibility_date = "2022-06-03"
 
 [dev]
 host="localhost"
+
+[[d1_databases]]
+binding = "DB" # i.e. available in your Worker on env.DB
+database_name = "crowdclix-data"
+database_id = "21664d7c-b815-4360-8896-e108f44275de"
