@@ -1,8 +1,9 @@
 const DB = "crowdclix-data";
 
-export async function getArtist(env, ArtistID) {
-    const artist = await env.DB.prepare(
-        "SELECT * FROM Artists WHERE ArtistID = ?"
+
+export async function getArtist(env, headers, artistName) {
+    const {results} = await env.DB.prepare(
+        "SELECT * FROM Artists WHERE ArtistName = ?"
     )
         .bind(ArtistID)
         .first();
@@ -11,7 +12,9 @@ export async function getArtist(env, ArtistID) {
             throw new Error('Not found');
         }
 
-    return Response.json(artist);
+        return Response.json(results, {
+            headers: headers
+        });
     
 }
 

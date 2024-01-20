@@ -12,10 +12,14 @@ const hardcodedArtistName    = "Sonic Mirage"
 
 export default {
     async fetch(request, env, ctx) {
+        const headers = [
+            ['Access-Control-Allow-Origin', '*']
+        ];
+
         const {pathname} = new URL(request.url);
         if (pathname.startsWith('/artist')) {
 			const id = pathname.split('/').pop()
-            return getArtist(env, id);
+            return getArtist(env, headers, id);
 		}	
 		return new Response("Error Not Found")
     }
