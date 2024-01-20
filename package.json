@@ -9,5 +9,8 @@
     "start": "wrangler dev",
     "deploy": "wrangler deploy",
     "resetdb": "wrangler d1 execute crowdclix-data --local --file=./schema.sql"
+  },
+  "dependencies": {
+    "get-stream": "^8.0.1"
   }
 }

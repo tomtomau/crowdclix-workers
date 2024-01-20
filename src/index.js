@@ -1,5 +1,7 @@
 import {getArtist} from "./get-artist";
+import {postSignup} from "./signup";
 import {getPageviews} from "./get-pageviews";
+
 
 /**
  * Welcome to Cloudflare Workers! This is your first worker.
@@ -21,6 +23,8 @@ export default {
         ];
 
         const {pathname} = new URL(request.url);
+        const method = request.method;
+        const body = request.body;
 
         if (pathname.startsWith('/artists')) {
 			const id = pathname.split('/').pop()
@@ -31,7 +35,11 @@ export default {
 			const id = pathname.split('/').pop()
             return getPageviews(env, DB, headers, id);
 		}
+    if (pathname === '/signup' && method === "POST") {
+      console.log(request);
 
+      return postSignup(body);
+    }
 		return new Response("Error Not Found")
     }
 };
