@@ -71,7 +71,7 @@ export default {
 
         if (pathname.startsWith('/signup') && method === "GET") {
             const id = pathname.split('/').pop()
-            return getMessages(env, DB, headers, id);
+            return getSignups(env, DB, headers, id);
         }
 
         return new Response("Error Not Found")
