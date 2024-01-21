@@ -3,6 +3,7 @@ import {postSignup} from "./signup";
 import {getPageviews} from "./get-pageviews";
 import {postPageviews} from "./post-pageviews";
 import {getMessages} from "./get-messages";
+import {postmessages} from "./message";
 
 /**
  * Welcome to Cloudflare Workers! This is your first worker.
@@ -48,7 +49,7 @@ export default {
 
         if (pathname.startsWith('/pageviews') && method === "POST") {
             const id = pathname.split('/').pop()
-            return postPageviews(env, DB, id);
+            return postPageviews(env, DB, headers, id);
         }
 
         if (pathname.startsWith('/signup') && method === "POST") {
@@ -57,10 +58,16 @@ export default {
             return postSignup(env, body, headers, id);
         }
 
+        if (pathname.startsWith('/messages') && method === "POST") {
+            const id = pathname.split('/').pop()
+            return postmessages(env, body, headers, id);
+        }
+
         if (pathname.startsWith('/messages') && method === "GET") {
             const id = pathname.split('/').pop()
             return getMessages(env, DB, headers, id);
         }
+
         return new Response("Error Not Found")
     }
 };
