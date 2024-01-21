@@ -2,7 +2,8 @@ import {getArtist} from "./get-artist";
 import {postSignup} from "./signup";
 import {getPageviews} from "./get-pageviews";
 import {postPageviews} from "./post-pageviews";
-import {postmessages} from "./message.js"
+import {getMessages} from "./get-messages";
+import {postmessages} from "./message";
 
 /**
  * Welcome to Cloudflare Workers! This is your first worker.
@@ -13,7 +14,7 @@ import {postmessages} from "./message.js"
  *
  * Learn more at https://developers.cloudflare.com/workers/
  */
-const hardcodedArtistName    = "Sonic Mirage"
+const hardcodedArtistName = "Sonic Mirage"
 const DB = "crowdclix-data";
 
 
@@ -23,35 +24,50 @@ export default {
             ['Access-Control-Allow-Origin', '*']
         ];
 
-      const {pathname} = new URL(request.url);
-      const method = request.method;
-      const body = request.body;
+        const {pathname} = new URL(request.url);
+        const method = request.method;
+        const body = request.body;
 
-      if (pathname.startsWith('/artists')) {
-        const id = pathname.split('/').pop()
-        return getArtist(env, DB, headers, id);
-      }
+        if (method === 'OPTIONS') {
+            const corsPreflightHeaders = [
+                ...headers,
+                ['Access-Control-Allow-Methods', 'GET,HEAD,OPTIONS,POST,PUT'],
+                ['Access-Control-Allow-Headers', 'Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers']
+            ]
+            return new Response(null, {status: 200, headers: corsPreflightHeaders});
+        }
 
-      if (pathname.startsWith('/pageviews') && method === "GET") {
-        const id = pathname.split('/').pop()
-        return getPageviews(env, DB, headers, id);
-      }
+        if (pathname.startsWith('/artists')) {
+            const id = pathname.split('/').pop()
+            return getArtist(env, DB, headers, id);
+        }
 
-      if (pathname.startsWith('/pageviews') && method === "POST") {
-        const id = pathname.split('/').pop()
-        return postPageviews(env, DB, headers, id);
-      }
+        if (pathname.startsWith('/pageviews') && method === "GET") {
+            const id = pathname.split('/').pop()
+            return getPageviews(env, DB, headers, id);
+        }
 
-      if (pathname.startsWith('/signup') && method === "POST") {
-        const id = pathname.split('/').pop()
-        //console.log(request);
-        return postSignup(env, body, headers, id);
-      }
-      if (pathname.startsWith('/messages') && method === "POST") {
-        const id = pathname.split('/').pop()
-        return postmessages(env, body, headers, id);
-      }
-      
-      return new Response("Error Not Found")
+        if (pathname.startsWith('/pageviews') && method === "POST") {
+            const id = pathname.split('/').pop()
+            return postPageviews(env, DB, headers, id);
+        }
+
+        if (pathname.startsWith('/signup') && method === "POST") {
+            const id = pathname.split('/').pop()
+            //console.log(request);
+            return postSignup(env, body, headers, id);
+        }
+
+        if (pathname.startsWith('/messages') && method === "POST") {
+            const id = pathname.split('/').pop()
+            return postmessages(env, body, headers, id);
+        }
+
+        if (pathname.startsWith('/messages') && method === "GET") {
+            const id = pathname.split('/').pop()
+            return getMessages(env, DB, headers, id);
+        }
+
+        return new Response("Error Not Found")
     }
 };
