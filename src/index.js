@@ -28,7 +28,12 @@ export default {
         const body = request.body;
 
         if (method === 'OPTIONS') {
-            return new Response(null, {status: 200, headers: headers});
+            const corsPreflightHeaders = [
+                ...headers,
+                ['Access-Control-Allow-Methods', 'GET,HEAD,OPTIONS,POST,PUT'],
+                ['Access-Control-Allow-Headers', 'Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers']
+            ]
+            return new Response(null, {status: 200, headers: corsPreflightHeaders});
         }
 
         if (pathname.startsWith('/artists')) {
