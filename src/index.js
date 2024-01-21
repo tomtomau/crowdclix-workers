@@ -41,10 +41,10 @@ export default {
         return postPageviews(env, DB, id);
       }
 
-      if ((pathname === '/signup') && method === "POST") {
+      if (pathname.startsWith('/signup') && method === "POST") {
         const id = pathname.split('/').pop()
         //console.log(request);
-        return postSignup(body, id);
+        return postSignup(env, body, id);
       }
       return new Response("Error Not Found")
     }
