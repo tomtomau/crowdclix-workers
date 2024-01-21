@@ -9,7 +9,7 @@ export async function postSignup(env, body, id) {
 
     const { success } = await env.DB.prepare(
         //"INSERT INTO Signups (ArtistID, CustomerEmail) VALUES (?, ?)" //Test query
-        "INSERT INTO Signups (artistID, FanEmail) VALUES (?, ?)" //Final query
+        "INSERT INTO Signups (ArtistID, FanEmail) VALUES (?, ?)" //Final query
     )
         .bind(id, email_string) // This binds values to the question nmarks in the query.
         .run();
