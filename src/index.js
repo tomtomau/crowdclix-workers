@@ -74,6 +74,11 @@ export default {
           const id = pathname.split('/').pop()
           return postLighter(env, DB, headers, id);
       }
+
+        if (pathname.startsWith('/signup') && method === "GET") {
+            const id = pathname.split('/').pop()
+            return getSignups(env, DB, headers, id);
+        }
         return new Response("Error Not Found")
     }
 };

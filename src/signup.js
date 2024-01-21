@@ -13,8 +13,8 @@ export async function postSignup(env, body, headers, id) {
 
     if (success) {
         console.log("Signup stored success.");
-        return new Response(null, { headers: headers, status: 200 , headers});
+        return new Response(null, { headers: headers, status: 200});
     }
 
-    return new Response(null, { headers: headers, status: 404 , headers});
+    return new Response(null, { headers: headers, status: 404});
 }
