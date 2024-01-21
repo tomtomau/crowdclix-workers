@@ -16,8 +16,8 @@ export async function postSignup(env, body, id) {
 
     if (success) {
         console.log("Signup stored success.");
-        return new Response(NULL, { status: 200 })        
+        return new Response(null, { status: 200 })        
     }
-    return new Response(NULL, { status: 404 })
+    return new Response(null, { status: 404 })
     
 }
