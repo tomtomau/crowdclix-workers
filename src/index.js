@@ -42,8 +42,9 @@ export default {
       }
 
       if ((pathname === '/signup') && method === "POST") {
-        console.log(request);
-        return postSignup(body);
+        const id = pathname.split('/').pop()
+        //console.log(request);
+        return postSignup(body, id);
       }
       return new Response("Error Not Found")
     }
