@@ -2,6 +2,7 @@ import {getArtist} from "./get-artist";
 import {postSignup} from "./signup";
 import {getPageviews} from "./get-pageviews";
 import {postPageviews} from "./post-pageviews";
+import {getMessages} from "./get-messages";
 
 /**
  * Welcome to Cloudflare Workers! This is your first worker.
@@ -45,6 +46,11 @@ export default {
         const id = pathname.split('/').pop()
         //console.log(request);
         return postSignup(env, body, headers, id);
+      }
+
+      if (pathname.startsWith('/messages') && method === "GET") {
+        const id = pathname.split('/').pop()
+        return getMessages(env, DB, headers, id);
       }
       return new Response("Error Not Found")
     }
