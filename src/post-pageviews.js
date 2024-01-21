@@ -8,8 +8,8 @@ export async function postPageviews(env, DB, artistID) {
         .run()
 
     if (success) {
-        return new Response({status: 200})
+        return new Response(null, {status: 200})
     } else {
-        return new Response({status: 404})
+        return new Response(null, {status: 404})
     }
 }
