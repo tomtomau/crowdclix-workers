@@ -1,6 +1,3 @@
-
-// This is the lighter-on file, don't get confused it looks like other methods at a glance.
-
 export async function postLighter(env, DB, headers, id) {
 
     const {success} = await env.DB.prepare(
