@@ -1,5 +1,6 @@
 DROP TABLE IF EXISTS Artists;
 DROP TABLE IF EXISTS Signups;
+DROP TABLE IF EXISTS Messages;
 
 CREATE TABLE IF NOT EXISTS Artists (ArtistID INTEGER PRIMARY KEY,
                                     ArtistName TEXT,
@@ -8,7 +9,10 @@ CREATE TABLE IF NOT EXISTS Artists (ArtistID INTEGER PRIMARY KEY,
                                     ArtistPageviews INTEGER);
 
 CREATE TABLE IF NOT EXISTS Signups (ArtistID INTEGER PRIMARY KEY,
-                                    CustomerEmail TEXT);
+                                    FanEmail TEXT);
+
+CREATE TABLE IF NOT EXISTS Messages (ArtistID INTEGER PRIMARY KEY,
+                                     FanMessage TEXT);
 
 INSERT INTO Artists (ArtistID,
                      ArtistName,
@@ -22,6 +26,11 @@ INSERT INTO Artists (ArtistID,
                      10);
                 
 INSERT INTO Signups (ArtistID,
-                     CustomerEmail)
+                     FanEmail)
             VALUES (1,
                     "newcustomer@email.com")
+
+INSERT INTO Messages (ArtistID,
+                      FanMessage)
+            VALUES (1,
+                    "I love Sonic Mirage 😍😍😍")
