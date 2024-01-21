@@ -1,7 +1,7 @@
 import {getArtist} from "./get-artist";
 import {postSignup} from "./signup";
 import {getPageviews} from "./get-pageviews";
-
+import {postPageviews} from "./post-pageviews";
 
 /**
  * Welcome to Cloudflare Workers! This is your first worker.
@@ -22,30 +22,29 @@ export default {
             ['Access-Control-Allow-Origin', '*']
         ];
 
-        const {pathname} = new URL(request.url);
-        const method = request.method;
-        const body = request.body;
+      const {pathname} = new URL(request.url);
+      const method = request.method;
+      const body = request.body;
 
-        if (pathname.startsWith('/artists')) {
-			const id = pathname.split('/').pop()
-            return getArtist(env, DB, headers, id);
-		}
+      if (pathname.startsWith('/artists')) {
+        const id = pathname.split('/').pop()
+        return getArtist(env, DB, headers, id);
+      }
 
-		if (pathname.startsWith('/pageviews' && method === "GET")) {
-			const id = pathname.split('/').pop()
-            return getPageviews(env, DB, headers, id);
-		}
+      if (pathname.startsWith('/pageviews') && method === "GET") {
+        const id = pathname.split('/').pop()
+        return getPageviews(env, DB, headers, id);
+      }
 
-		if (pathname.startsWith('/pageviews' && method === "POST")) {
-			const id = pathname.split('/').pop()
-            return postPageviews(env, DB, headers, id);
-		}
+      if (pathname.startsWith('/pageviews') && method === "POST") {
+        const id = pathname.split('/').pop()
+        return postPageviews(env, DB, id);
+      }
 
-    if (pathname === '/signup' && method === "POST") {
-      console.log(request);
-
-      return postSignup(body);
-    }
-		return new Response("Error Not Found")
+      if ((pathname === '/signup') && method === "POST") {
+        console.log(request);
+        return postSignup(body);
+      }
+      return new Response("Error Not Found")
     }
 };
