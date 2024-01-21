@@ -3,6 +3,7 @@ import {postSignup} from "./signup";
 import {getPageviews} from "./get-pageviews";
 import {postPageviews} from "./post-pageviews";
 import {getMessages} from "./get-messages";
+import { postLighter } from "./lighter-on";
 
 /**
  * Welcome to Cloudflare Workers! This is your first worker.
@@ -61,6 +62,11 @@ export default {
             const id = pathname.split('/').pop()
             return getMessages(env, DB, headers, id);
         }
+        //fix this
+        if (pathname.startsWith('/lighter')) {
+          const id = pathname.split('/').pop()
+          return postLighter(env, DB, headers, id);
+      }
         return new Response("Error Not Found")
     }
 };
