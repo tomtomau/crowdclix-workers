@@ -1,5 +1,6 @@
 import {getArtist} from "./get-artist";
 import {postSignup} from "./signup";
+import {getSignups} from "./get-signups";
 import {getPageviews} from "./get-pageviews";
 import {postPageviews} from "./post-pageviews";
 import {getMessages} from "./get-messages";
@@ -64,6 +65,11 @@ export default {
         }
 
         if (pathname.startsWith('/messages') && method === "GET") {
+            const id = pathname.split('/').pop()
+            return getMessages(env, DB, headers, id);
+        }
+
+        if (pathname.startsWith('/signup') && method === "GET") {
             const id = pathname.split('/').pop()
             return getMessages(env, DB, headers, id);
         }
