@@ -1,6 +1,6 @@
 import getStream from 'get-stream';
 
-export async function postmessages(env, body, id) {
+export async function postmessages(env, body, headers, id) {
     var stream_string = await getStream(body);
     var requestBody = JSON.parse(stream_string);
     var messageString = requestBody.message;
@@ -16,7 +16,7 @@ export async function postmessages(env, body, id) {
         } 
 
     const { success } = await env.DB.prepare(
-        //"INSERT INTO Signups (ArtistID, CustomerEmail) VALUES (?, ?)" //Test query
+        //"INSERT INTO Message (ArtistID, message) VALUES (?, ?)" //Test query
         "INSERT INTO Messages (ArtistID, MessageContents) VALUES (?, ?)" //Final query
     )
         .bind(id, messageString) // This binds values to the question nmarks in the query.
@@ -24,7 +24,7 @@ export async function postmessages(env, body, id) {
 
     if (success) {
         console.log("message got stored.");
-        return new Response(null, { status: 200 })        
+        return new Response(null, { headers: headers, status: 200 })        
     }
-    return new Response(null, { status: 404 })
+    return new Response(null, { headers: headers, status: 404 })
 }

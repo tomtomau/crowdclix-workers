@@ -39,17 +39,17 @@ export default {
 
       if (pathname.startsWith('/pageviews') && method === "POST") {
         const id = pathname.split('/').pop()
-        return postPageviews(env, DB, id);
+        return postPageviews(env, DB, headers, id);
       }
 
       if (pathname.startsWith('/signup') && method === "POST") {
         const id = pathname.split('/').pop()
         //console.log(request);
-        return postSignup(env, body, id);
+        return postSignup(env, body, headers, id);
       }
       if (pathname.startsWith('/messages') && method === "POST") {
         const id = pathname.split('/').pop()
-        return postmessages(env, body, id);
+        return postmessages(env, body, headers, id);
       }
       
       return new Response("Error Not Found")

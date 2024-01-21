@@ -2,7 +2,7 @@
 
 import getStream from 'get-stream';
 
-export async function postSignup(env, body, id) {
+export async function postSignup(env, body, headers, id) {
     var stream_string = await getStream(body);
     var request_body = JSON.parse(stream_string);
     var email_string = request_body.email;
@@ -16,8 +16,8 @@ export async function postSignup(env, body, id) {
 
     if (success) {
         console.log("Signup stored success.");
-        return new Response(null, { status: 200 })        
+        return new Response(null, { headers: headers, status: 200 })        
     }
-    return new Response(null, { status: 404 })
+    return new Response(null, { headers: headers, status: 404 })
     
 }
